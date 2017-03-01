@@ -6,7 +6,7 @@ allprojects {
 
 ext {
     //Android
-    androidBuildToolsVersion = "25.0.0"
+    androidBuildToolsVersion = "25.0.2"
     androidMinSdkVersion = 15
     androidTargetSdkVersion = 25
     androidCompileSdkVersion = 25
@@ -38,7 +38,6 @@ ext {
             daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
             dagger:             "com.google.dagger:dagger:${daggerVersion}",
             butterKnife:        "com.jakewharton:butterknife:${butterKnifeVersion}",
-            recyclerView:       "com.android.support:recyclerview-v7:${recyclerViewVersion}",
             rxJava:             "io.reactivex:rxjava:${rxJavaVersion}",
             rxAndroid:          "io.reactivex:rxandroid:${rxAndroidVersion}",
             javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
