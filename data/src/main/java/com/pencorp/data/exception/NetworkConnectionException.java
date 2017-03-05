@@ -4,5 +4,21 @@ package com.pencorp.data.exception;
  * Created by Tuane on 5/03/17.
  */
 
-public class NetworkConnectionException {
+public class NetworkConnectionException extends Exception {
+
+    public NetworkConnectionException() {
+        super();
+    }
+
+    public NetworkConnectionException(final String message) {
+        super(message);
+    }
+
+    public NetworkConnectionException(final String message, final Throwable cause) {
+        super(message, cause);
+    }
+
+    public NetworkConnectionException(final Throwable cause) {
+        super(cause);
+    }
 }
