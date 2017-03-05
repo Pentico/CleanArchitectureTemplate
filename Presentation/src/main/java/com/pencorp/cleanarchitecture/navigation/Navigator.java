@@ -5,6 +5,11 @@ package com.pencorp.cleanarchitecture.navigation;
  */
 
 
+import android.content.Context;
+import android.content.Intent;
+
+import com.pencorp.cleanarchitecture.view.activity.InfoActivity;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -19,4 +24,10 @@ public class Navigator {
         //empty
     }
 
+    public void  navigateToInfo(Context context){
+        if(context != null) {
+            Intent intentToLaunch = InfoActivity.getCallingIntent(context);
+            context.startActivity(intentToLaunch);
+        }
+    }
 }
