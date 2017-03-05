@@ -8,4 +8,8 @@ import dagger.Module;
 
 @Module
 public class InfoModule {
+
+    public InfoModule(){}
+
+
 }
