@@ -31,5 +31,7 @@ public class InfoDataStoreFactory {
         InfoDataStore infoDataStore;
 
         infoDataStore = new DiskInfoDataStore(this.infoCache);
+
+        return infoDataStore;
     }
 }
