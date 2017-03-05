@@ -6,7 +6,8 @@ package com.pencorp.data.cache;
 
 import android.content.Context;
 
-import com.google.gson.JsonSerializer;
+import com.pencorp.data.cache.serializer.JsonSerializer;
+import com.pencorp.data.entity.InfoEntity;
 import com.pencorp.domain.executor.ThreadExecutor;
 
 import java.io.File;
@@ -37,9 +38,9 @@ public class InfoCacheImpl implements InfoCache {
     /**
      * Constructor of the class {@link InfoCache}.
      *
-     * @param context A
+     * @param context             A
      * @param infoCacheSerializer {@link JsonSerializer} for object serialization.
-     * @param fileManager {@link FileManager} for saving serialized objects to the file system.
+     * @param fileManager         {@link FileManager} for saving serialized objects to the file system.
      */
     @Inject
     public InfoCacheImpl(Context context, JsonSerializer infoCacheSerializer,
@@ -54,13 +55,14 @@ public class InfoCacheImpl implements InfoCache {
         this.threadExecutor = executor;
     }
 
-    @Override public Observable<InfoEntity> get(final int userId) {
+    @Override
+    public Observable<InfoEntity> get() {
         return Observable.create(subscriber -> {
-            File userEntityFile = InfoCacheImpl.this.buildFile(userId);
+            File userEntityFile = InfoCacheImpl.this.buildFile();
             String fileContent = InfoCacheImpl.this.fileManager.readFileContent(userEntityFile);
-            InfoEntity userEntity = InfoCacheImpl.this.serializer.deserialize(fileContent);
+            InfoEntity infoEntity = InfoCacheImpl.this.serializer.deserialize(fileContent);
 
-            if (userEntity != null) {
+            if (infoEntity != null) {
                 subscriber.onNext(infoEntity);
                 subscriber.onCompleted();
             } else {
@@ -69,8 +71,9 @@ public class InfoCacheImpl implements InfoCache {
         });
     }
 
-    @Override public void put(InfoEntity infoEntity) {
-        if (userEntity != null) {
+    @Override
+    public void put(InfoEntity infoEntity) {
+        if (infoEntity != null) {
             File userEntityFile = this.buildFile();
             if (!isCached()) {
                 String jsonString = this.serializer.serialize(infoEntity);
@@ -81,12 +84,14 @@ public class InfoCacheImpl implements InfoCache {
         }
     }
 
-    @Override public boolean isCached() {
-        File userEntitiyFile = this.buildFile();
+    @Override
+    public boolean isCached() {
+        File infoEntitiyFile = this.buildFile();
         return this.fileManager.exists(infoEntitiyFile);
     }
 
-    @Override public boolean isExpired() {
+    @Override
+    public boolean isExpired() {
         long currentTime = System.currentTimeMillis();
         long lastUpdateTime = this.getLastCacheUpdateTimeMillis();
 
@@ -99,7 +104,8 @@ public class InfoCacheImpl implements InfoCache {
         return expired;
     }
 
-    @Override public void evictAll() {
+    @Override
+    public void evictAll() {
         this.executeAsynchronously(new CacheEvictor(this.fileManager, this.cacheDir));
     }
 
@@ -158,7 +164,8 @@ public class InfoCacheImpl implements InfoCache {
             this.fileContent = fileContent;
         }
 
-        @Override public void run() {
+        @Override
+        public void run() {
             this.fileManager.writeToFile(fileToWrite, fileContent);
         }
     }
@@ -175,7 +182,10 @@ public class InfoCacheImpl implements InfoCache {
             this.cacheDir = cacheDir;
         }
 
-        @Override public void run() {
+        @Override
+        public void run() {
             this.fileManager.clearDirectory(this.cacheDir);
         }
     }
+
+}

@@ -1,6 +1,7 @@
 package com.pencorp.data.cache.serializer;
 
 import com.google.gson.Gson;
+import com.pencorp.data.entity.InfoEntity;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

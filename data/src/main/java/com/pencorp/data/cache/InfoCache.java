@@ -4,6 +4,8 @@ package com.pencorp.data.cache;
  * Created by Tuane on 5/03/17.
  */
 
+import com.pencorp.data.entity.InfoEntity;
+
 import rx.Observable;
 
 /**
@@ -20,7 +22,7 @@ public interface InfoCache {
     /**
      * Puts and element into the cache.
      *
-     * @param InfoEntity Element to insert in the cache.
+     * @param infoEntity Element to insert in the cache.
      */
     void put(InfoEntity infoEntity);
 
