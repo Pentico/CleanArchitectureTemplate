@@ -4,6 +4,8 @@ package com.pencorp.data.executor;
  * Created by Tuane on 5/03/17.
  */
 
+import com.pencorp.domain.executor.ThreadExecutor;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;

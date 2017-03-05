@@ -1,10 +1,10 @@
-package com.pencorp.cleanarchitecture;
+package com.pencorp.cleanarchitecture.view.activity;
 
-import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends Activity {
+import com.pencorp.cleanarchitecture.R;
+
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
