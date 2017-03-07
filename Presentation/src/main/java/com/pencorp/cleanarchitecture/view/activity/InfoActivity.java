@@ -33,7 +33,7 @@ public class InfoActivity extends BaseActivity implements HasComponent {
         }
     }
 
-    @Override
+
     public void initializeInjector() {
         this.infoComponent = DaggerInfoComponent.builder()
                 .applicationComponent(getApplicationComponent())

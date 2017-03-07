@@ -8,6 +8,7 @@ import android.content.Context;
 
 import com.pencorp.data.cache.serializer.JsonSerializer;
 import com.pencorp.data.entity.InfoEntity;
+import com.pencorp.data.exception.InfoNotFoundException;
 import com.pencorp.domain.executor.ThreadExecutor;
 
 import java.io.File;
