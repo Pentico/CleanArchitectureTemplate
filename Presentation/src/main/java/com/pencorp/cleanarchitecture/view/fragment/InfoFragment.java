@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.pencorp.cleanarchitecture.R;
 import com.pencorp.cleanarchitecture.internal.di.components.InfoComponent;
@@ -14,6 +17,7 @@ import com.pencorp.cleanarchitecture.view.InfoView;
 
 import javax.inject.Inject;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
@@ -24,6 +28,21 @@ public class InfoFragment  extends BaseFragment implements InfoView{
 
     @Inject
     InfoPresenter infoPresenter;
+
+    @Bind(R.id.tv_firstname)
+    TextView tv_firstname;
+    @Bind(R.id.tv_lastname)
+    TextView tv_lastname;
+    @Bind(R.id.rl_progress)
+    RelativeLayout rl_progress;
+    @Bind(R.id.rl_retry)
+    RelativeLayout rl_retry;
+    @Bind(R.id.bt_retry)
+    Button bt_retry;
+
+    public InfoFragment() {
+        setRetainInstance(true);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,7 +61,7 @@ public class InfoFragment  extends BaseFragment implements InfoView{
     @Override
     public void onViewCreated(View view , Bundle savedInstanceState) {
         super.onViewCreated(view,savedInstanceState);
-        this.infoPresenter.setview(this);
+        this.infoPresenter.setView(this);
         if(savedInstanceState == null){
             this.loadInfoData();
         }
@@ -80,36 +99,50 @@ public class InfoFragment  extends BaseFragment implements InfoView{
 
     @Override
     public void viewInfo(InfoModel infoModel) {
-
+        if(infoModel != null) {
+            this.tv_firstname.setText(infoModel.getFirstname());
+            this.tv_lastname.setText(infoModel.getLastname());
+        }
     }
 
     @Override
     public void showLoading() {
-
+        this.rl_progress.setVisibility(View.VISIBLE);
+        this.getActivity().setProgressBarIndeterminateVisibility(true);
     }
 
     @Override
     public void hideLoading() {
-
+        this.rl_progress.setVisibility(View.GONE);
+        this.getActivity().setProgressBarIndeterminateVisibility(false);
     }
 
     @Override
     public void showRetry() {
-
+        this.rl_retry.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideRetry() {
-
+        this.rl_retry.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showError(String message) {
-
+        this.showToastMessage(message);
     }
 
     @Override
     public Context context() {
-        return null;
+        return getActivity().getApplicationContext();
+    }
+
+    /**
+     * Load Info
+     */
+    private void loadInfoData() {
+        if(this.infoPresenter != null) {
+            this.infoPresenter.initialize();
+        }
     }
 }
