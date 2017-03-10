@@ -10,6 +10,7 @@ import com.pencorp.data.repository.datasource.Info.InfoDataStoreFactory;
 import com.pencorp.domain.Info;
 import com.pencorp.domain.repository.InfoRepository;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import rx.Observable;
@@ -23,6 +24,7 @@ public class InfoDataRepository implements InfoRepository{
     private final InfoDataStoreFactory infoDataStoreFactory;
     private final InfoEntityDataMapper infoEntityDataMapper;
 
+    @Inject
     public InfoDataRepository(InfoDataStoreFactory infoDataStoreFactory,
                               InfoEntityDataMapper infoEntityDataMapper) {
         this.infoDataStoreFactory = infoDataStoreFactory;

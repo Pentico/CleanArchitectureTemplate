@@ -2,6 +2,7 @@ package com.pencorp.cleanarchitecture;
 
 import android.app.Application;
 
+
 import com.pencorp.cleanarchitecture.internal.di.components.ApplicationComponent;
 import com.pencorp.cleanarchitecture.internal.di.components.DaggerApplicationComponent;
 import com.pencorp.cleanarchitecture.internal.di.modules.ApplicationModule;

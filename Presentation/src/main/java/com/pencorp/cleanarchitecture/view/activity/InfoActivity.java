@@ -6,8 +6,9 @@ import android.os.Bundle;
 
 import com.pencorp.cleanarchitecture.R;
 import com.pencorp.cleanarchitecture.internal.di.HasComponent;
-import com.pencorp.cleanarchitecture.internal.di.components.DaggerActivityComponent;
+import com.pencorp.cleanarchitecture.internal.di.components.DaggerInfoComponent;
 import com.pencorp.cleanarchitecture.internal.di.components.InfoComponent;
+import com.pencorp.cleanarchitecture.internal.di.modules.InfoModule;
 import com.pencorp.cleanarchitecture.view.fragment.InfoFragment;
 
 /**
@@ -38,11 +39,12 @@ public class InfoActivity extends BaseActivity implements HasComponent {
         this.infoComponent = DaggerInfoComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
+                .infoModule(new InfoModule())
                 .build();
     }
 
     @Override
-    public Object getComponent() {
-        return null;
+    public InfoComponent getComponent() {
+        return infoComponent;
     }
 }

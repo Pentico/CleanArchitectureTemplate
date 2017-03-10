@@ -8,9 +8,13 @@ import android.content.Context;
 
 import com.pencorp.cleanarchitecture.AndroidApplication;
 import com.pencorp.cleanarchitecture.UIThread;
+import com.pencorp.data.cache.InfoCache;
+import com.pencorp.data.cache.InfoCacheImpl;
 import com.pencorp.data.executor.JobExecutor;
+import com.pencorp.data.repository.InfoDataRepository;
 import com.pencorp.domain.executor.PostExecutionThread;
 import com.pencorp.domain.executor.ThreadExecutor;
+import com.pencorp.domain.repository.InfoRepository;
 
 import javax.inject.Singleton;
 
@@ -46,5 +50,16 @@ public class ApplicationModule {
         return uiThread;
     }
 
+    @Provides
+    @Singleton
+    InfoRepository provideInfoRepository(InfoDataRepository infoRepository) {
+        return infoRepository;
+    }
+
+    @Provides
+    @Singleton
+    InfoCache provideUserCache(InfoCacheImpl infoCache) {
+        return infoCache;
+    }
 
 }
