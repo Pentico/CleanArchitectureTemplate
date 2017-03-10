@@ -16,7 +16,6 @@ public class InfoModelDataMapper {
     @Inject
     InfoModelDataMapper(){}
 
-
     /**
      * Transform a {@link Info} into an {@link InfoModel}
      * @param info Object to be transformed
