@@ -2,9 +2,16 @@ package com.pencorp.cleanarchitecture.presenter;
 
 import android.support.annotation.NonNull;
 
+import com.fernandocejas.frodo.annotation.RxLogSubscriber;
+import com.pencorp.cleanarchitecture.exception.ErrorMessageFactory;
 import com.pencorp.cleanarchitecture.internal.di.PerActivity;
 import com.pencorp.cleanarchitecture.mapper.InfoModelDataMapper;
+import com.pencorp.cleanarchitecture.model.InfoModel;
 import com.pencorp.cleanarchitecture.view.InfoView;
+import com.pencorp.domain.Info;
+import com.pencorp.domain.exception.DefaultErrorBundle;
+import com.pencorp.domain.exception.ErrorBundle;
+import com.pencorp.domain.interactor.DefaultSubscriber;
 import com.pencorp.domain.interactor.UseCase;
 
 import javax.inject.Inject;
@@ -60,12 +67,57 @@ public class InfoPresenter implements Presenter {
     private void loadInfo() {
         this.hideViewRetry();
         this.showViewLoading();
-        this.getUserDetails();
+        this.getView();
     }
 
     private void showViewLoading() {
         this.viewInfoView.showLoading();
     }
 
+    private void hideViewLoading() {
+        this.viewInfoView.hideLoading();
+    }
 
+    private void showViewRetry() {
+        this.viewInfoView.showRetry();
+    }
+    private void hideViewRetry() {
+        this.viewInfoView.hideRetry();
+    }
+
+    private void showErrorMessage(ErrorBundle errorBundle) {
+        String errorMessage = ErrorMessageFactory.create(this.viewInfoView.context(),
+                errorBundle.getException());
+        this.viewInfoView.showError(errorMessage);
+    }
+
+    private void showInfoInView(Info info) {
+        final InfoModel infoModel = this.infoModelDataMapper.tranform(info);
+        this.viewInfoView.viewInfo(infoModel);
+    }
+
+    private void getView() {
+        this.getInfoUseCase.execute(new InfoSubscriber());
+    }
+
+    @RxLogSubscriber
+    private final class InfoSubscriber extends DefaultSubscriber<Info> {
+
+        @Override
+        public void onCompleted() {
+            InfoPresenter.this.hideViewLoading();
+        }
+
+        @Override
+        public void onError(Throwable e){
+            InfoPresenter.this.hideViewLoading();
+            InfoPresenter.this.showErrorMessage(new DefaultErrorBundle((Exception) e));
+            InfoPresenter.this.showViewRetry();
+        }
+
+        @Override
+        public void onNext(Info info) {
+            InfoPresenter.this.showInfoInView(info);
+        }
+    }
 }
