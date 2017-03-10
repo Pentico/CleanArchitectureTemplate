@@ -24,6 +24,10 @@ public class Navigator {
         //empty
     }
 
+    /**
+     * Go to InfoActivity
+     * @param context
+     */
     public void  navigateToInfo(Context context){
         if(context != null) {
             Intent intentToLaunch = InfoActivity.getCallingIntent(context);

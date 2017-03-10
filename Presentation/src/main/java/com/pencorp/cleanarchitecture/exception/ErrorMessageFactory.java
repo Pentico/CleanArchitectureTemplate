@@ -3,6 +3,7 @@ package com.pencorp.cleanarchitecture.exception;
 import android.content.Context;
 
 import com.pencorp.cleanarchitecture.R;
+import com.pencorp.data.exception.InfoNotFoundException;
 import com.pencorp.data.exception.NetworkConnectionException;
 
 /**

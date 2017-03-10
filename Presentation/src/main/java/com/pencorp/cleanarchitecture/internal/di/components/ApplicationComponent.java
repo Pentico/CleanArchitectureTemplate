@@ -10,6 +10,7 @@ import com.pencorp.cleanarchitecture.internal.di.modules.ApplicationModule;
 import com.pencorp.cleanarchitecture.view.activity.BaseActivity;
 import com.pencorp.domain.executor.PostExecutionThread;
 import com.pencorp.domain.executor.ThreadExecutor;
+import com.pencorp.domain.repository.InfoRepository;
 
 import javax.inject.Singleton;
 
@@ -27,5 +28,5 @@ public interface ApplicationComponent {
     Context context();
     ThreadExecutor threadExecutor();
     PostExecutionThread postExecutionThread();
-
+    InfoRepository infoRepository();
 }
