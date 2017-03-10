@@ -124,7 +124,7 @@ public class InfoFragment  extends BaseFragment implements InfoView{
 
     @Override
     public void hideRetry() {
-        this.rl_retry.setVisibility(View.VISIBLE);
+        this.rl_retry.setVisibility(View.GONE);
     }
 
     @Override
