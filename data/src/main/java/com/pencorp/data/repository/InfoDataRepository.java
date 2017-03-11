@@ -37,4 +37,12 @@ public class InfoDataRepository implements InfoRepository{
 
         return infoDataStore.infoEntity().map(this.infoEntityDataMapper::transform);
     }
+
+    @Override
+    public Observable<Info> info(String firstName, String lastName) {
+
+        final InfoDataStore infoDataStore = this.infoDataStoreFactory.create(firstName, lastName);
+        return infoDataStore.infoEntity().map(this.infoEntityDataMapper::transform);
+    }
+
 }

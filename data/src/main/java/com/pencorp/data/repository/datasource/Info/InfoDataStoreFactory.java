@@ -19,7 +19,8 @@ public class InfoDataStoreFactory {
 
     private final Context context;
     private final InfoCache infoCache;
-
+    private String firstName = "Alfred";
+    private String lastName = "Morulane";
 
     @Inject
     public InfoDataStoreFactory(@NonNull Context context, @NonNull InfoCache infoCache) {
@@ -44,14 +45,24 @@ public class InfoDataStoreFactory {
         infoDataStore = new DiskInfoDataStore(this.infoCache);
         return infoDataStore;
     }
+    public InfoDataStore create(final String firstName, final String lastName) {
 
+        this.lastName = lastName;
+        this.firstName = firstName;
+
+        InfoDataStore infoDataStore;
+        this.infoCache.put(mockInfoEntity());
+        infoDataStore = new DiskInfoDataStore(this.infoCache);
+        return infoDataStore;
+    }
     /**
      * Mock InfoEntity
      */
     private InfoEntity mockInfoEntity(){
+
         InfoEntity infoEntity = new InfoEntity();
-        infoEntity.setFirstname("Alfred");
-        infoEntity.setLastname("Morul");
+        infoEntity.setFirstname(firstName);
+        infoEntity.setLastname(lastName);
 
         return infoEntity;
     }

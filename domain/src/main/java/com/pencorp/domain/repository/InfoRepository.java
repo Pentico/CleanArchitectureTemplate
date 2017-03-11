@@ -15,4 +15,12 @@ public interface InfoRepository {
      *
      */
     Observable<Info> info();
+
+    /**
+     * Update the info the info that was Cached
+     * @param firstName
+     * @param lastName
+     * @return the new updated info
+     */
+    Observable<Info> info(final String firstName, final String lastName);
 }
