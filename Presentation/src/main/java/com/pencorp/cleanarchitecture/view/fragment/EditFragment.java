@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.pencorp.cleanarchitecture.R;
 import com.pencorp.cleanarchitecture.model.InfoModel;
@@ -24,6 +27,18 @@ public class EditFragment extends BaseFragment implements EditView {
 
     @Inject
     EditPresenter editPresenter;
+
+    @Bind(R.id.rl_progress)
+    RelativeLayout rl_progress;
+    @Bind(R.id.rl_retry)
+    RelativeLayout rl_retry;
+    @Bind(R.id.bt_retry)
+    Button bt_retry;
+    @Bind(R.id.tv_firstname)
+    TextView tv_firstname;
+    @Bind(R.id.tv_lastname)
+    TextView tv_lastname;
+
 
     public EditFragment() {
         setRetainInstance(true);
@@ -83,16 +98,11 @@ public class EditFragment extends BaseFragment implements EditView {
     }
 
     @Override
-    public void viewInfo(InfoModel infoModel) {
+    public void editInfo(InfoModel infoModel) {
         if(infoModel != null) {
             this.tv_firstname.setText(infoModel.getFirstname());
             this.tv_lastname.setText(infoModel.getLastname());
         }
-    }
-
-
-    @Override
-    public void editInfo(InfoModel infoModel) {
     }
 
     @Override
