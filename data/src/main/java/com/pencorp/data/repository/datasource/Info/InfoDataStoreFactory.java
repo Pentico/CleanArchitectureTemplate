@@ -33,12 +33,15 @@ public class InfoDataStoreFactory {
     public InfoDataStore create() {
         InfoDataStore infoDataStore;
 
-        if(!this.infoCache.isExpired() && this.infoCache.isCached()){
-            infoDataStore = new DiskInfoDataStore(this.infoCache);
-        }else {
-            this.infoCache.put(mockInfoEntity());
-            infoDataStore = new DiskInfoDataStore(this.infoCache);
-        }
+//        if(!this.infoCache.isExpired() && this.infoCache.isCached()){
+//            infoDataStore = new DiskInfoDataStore(this.infoCache);
+//        }else {
+//            this.infoCache.put(mockInfoEntity());
+//            infoDataStore = new DiskInfoDataStore(this.infoCache);
+//        }
+
+        this.infoCache.put(mockInfoEntity());
+        infoDataStore = new DiskInfoDataStore(this.infoCache);
         return infoDataStore;
     }
 
@@ -48,7 +51,7 @@ public class InfoDataStoreFactory {
     private InfoEntity mockInfoEntity(){
         InfoEntity infoEntity = new InfoEntity();
         infoEntity.setFirstname("Alfred");
-        infoEntity.setLastname("Morulane");
+        infoEntity.setLastname("Morul");
 
         return infoEntity;
     }

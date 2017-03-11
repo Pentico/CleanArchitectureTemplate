@@ -27,7 +27,7 @@ public class Info2 extends BaseActivity implements HasComponent<InfoComponent> {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_layout);
 
-        this.initializeInjector();
+//        this.initializeInjector();
         if (savedInstanceState == null) {
             addFragment(R.id.fragmentContainer, new InfoFragment());
         }
