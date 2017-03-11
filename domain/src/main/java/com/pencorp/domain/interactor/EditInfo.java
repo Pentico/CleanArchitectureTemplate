@@ -2,6 +2,9 @@ package com.pencorp.domain.interactor;
 
 import com.pencorp.domain.executor.PostExecutionThread;
 import com.pencorp.domain.executor.ThreadExecutor;
+import com.pencorp.domain.repository.InfoRepository;
+
+import javax.inject.Inject;
 
 import rx.Observable;
 
@@ -11,12 +14,21 @@ import rx.Observable;
 
 public class EditInfo extends UseCase {
 
-    protected EditInfo(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
+    private final InfoRepository infoRepository;
+    private final String firstName;
+    private final String lastName;
+
+    @Inject
+    public EditInfo(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
+                    InfoRepository infoRepository, String firstName, String lastName) {
         super(threadExecutor, postExecutionThread);
+        this.infoRepository = infoRepository;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     @Override
     protected Observable buildUseCaseObservable() {
-        return null;
+        return this.infoRepository.info(firstName,lastName);
     }
 }
