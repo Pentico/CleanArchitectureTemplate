@@ -1,6 +1,7 @@
 package com.pencorp.cleanarchitecture.internal.di.modules;
 
 import com.pencorp.cleanarchitecture.internal.di.PerActivity;
+import com.pencorp.domain.interactor.EditInfo;
 import com.pencorp.domain.interactor.GetInfo;
 import com.pencorp.domain.interactor.UseCase;
 
@@ -24,5 +25,13 @@ public class InfoModule {
     UseCase provideGetInfoUseCase(
             GetInfo getInfo) {
         return getInfo;
+    }
+
+    @Provides
+    @PerActivity
+    @Named("Edit")
+    UseCase provideEditInfoUseCase(
+            EditInfo editInfo) {
+        return editInfo;
     }
 }
